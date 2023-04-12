@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/login_demo_other_login_bg">
+
+    <RelativeLayout
+        android:id="@+id/login_dmeo_relative"
+        android:layout_width="match_parent"
+        android:layout_height="44dp">
+
+
+        <TextView
+            android:id="@+id/login_dmeo_title"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:gravity="center_vertical"
+            android:text="其他方式登录:"
+            android:textColor="#1E3179"
+            android:textSize="15sp" />
+
+
+        <LinearLayout
+            android:id="@+id/login_dmeo_linearLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/login_dmeo_weixin"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginRight="30dp"
+                android:background="@drawable/login_demo_weixin"
+                android:scaleType="centerCrop" />
+
+            <ImageView
+                android:id="@+id/login_dmeo_qq"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginRight="30dp"
+                android:background="@drawable/login_demo_qq" />
+
+            <ImageView
+                android:id="@+id/login_dmeo_weibo"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:background="@drawable/login_demo_weibo" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

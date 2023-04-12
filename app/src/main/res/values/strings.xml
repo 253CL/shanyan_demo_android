@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">一键登录</string>
+    <string name="enter_now">立即体验</string>
+    <string name="sdkinit">sdk  初 始 化</string>
+    <string name="preInitNum">sdk 预 取 号</string>
+    <string name="authpage">拉 起 授 权 页</string>
+    <string name="displacePhone">置 换 手 机 号</string>
+    <string name="time_skip_tv">跳过</string>
+    <string name="demo_a_config">A配置示例</string>
+    <string name="demo_b_config">B配置示例</string>
+    <string name="demo_c_config">C配置示例</string>
+    <string name="demo_d_config">D配置示例</string>
+    <string name="demo_e_config">E配置示例</string>
+    <string name="demo_f_config">F配置示例</string>
+    <string name="demo_g_config">G配置示例</string>
+    <string name="demo_h_config">H配置示例</string>
+    <string name="demo_i_config">I配置示例</string>
+    <string name="debug_mode">调试模式</string>
+    <string name="auth_mode">本机校验</string>
+    <string name="home_tv1">您的新一代</string>
+    <string name="home_tv2">身份验证解决方案</string>
+    <string name="debug_tv">通过优化验证流程,帮助企业从根源上有效防止用户流失,提升用户体验,让用户享受到瞬间完成验证的体验。</string>
+    <string name="tip_content">点击本机号码一键认证，即代表您已同意并授权一键登录通过国内三大运营商为您校验手机号码认证。</string>
+    <string name="privacy_content">尊敬的开发者，您好！
+\n自2019年12月30日工信部发布《App违法违规收集使用个人信息行为认定方法》起，数据合法合规的采集及使用规范越来越严格。近日，工信部启动新一轮的App合规检测工作。为了保证您的App顺利通过检测，结合当前监管关注重点，制作了Android SDK初始化数据采集合规方案。
+\n请牢记！合规三步走：
+\n1、您需要确保App有《隐私政策》，并且在用户首次启动App时就弹出《隐私政策》取得用户同意。
+\n2、您务必告知用户您选择一键登录SDK服务，请在《隐私政策》中增加如下参考条款：
+\n“我们的产品为改善注册及登录界面用户体验，集成第三方SDK一键登录服务：一键登录SDK，用于帮助实现用户一键登录行为。为了实现网关取号技术，一键登录SDK需要获取IP地址、网卡（MAC)地址、国际移动设备识别码（IMEI）、OAID（替代IMEI）、sim卡信息，并会收集手机机型、系统类型、系统版本、网络环境、网关取号报错日志等数据以提供统计分析服务能力，并可提供反欺诈等功能。”
+\n3、您务必确保用户同意《隐私政策》之后，再初始化一键登录SDK。</string>
+</resources>

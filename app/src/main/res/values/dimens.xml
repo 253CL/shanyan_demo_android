@@ -1,0 +1,5 @@
+<resources>
+    <dimen name="dialog_network_detail_wid">315dp</dimen>
+    <dimen name="dialog_network_detail_hei">484dp</dimen>
+    <dimen name="dialog_network_detail_hei_y">290dp</dimen>
+</resources>

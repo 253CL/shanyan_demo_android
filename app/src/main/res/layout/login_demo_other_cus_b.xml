@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="115dp">
+
+    <TextView
+        android:id="@+id/login_demo_tv1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="本机号码快捷登录"
+        android:textColor="#292929"
+        android:textSize="25sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/login_demo_tv2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/login_demo_tv1"
+        android:layout_marginTop="15dp"
+        android:text="本机号码未注册将自动创建新账号"
+        android:textColor="#666666"
+        android:textSize="13sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/login_demo_tv2"
+        android:layout_marginTop="30dp"
+        android:text="本机号码"
+        android:textColor="#666666"
+        android:textSize="13sp" />
+
+</RelativeLayout>

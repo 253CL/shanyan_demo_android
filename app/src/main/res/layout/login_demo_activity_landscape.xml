@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_demo_landscape_bg"
+    tools:context=".view.LandscapeActivity">
+
+    <RelativeLayout
+        android:id="@+id/login_dmeo_other_login_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="10dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/login_demo_return_left_bg" />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/demo_seletor_F"
+        android:layout_width="300dp"
+        android:layout_height="48dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/login_demo_auth_bg"
+        android:text="F配置示例"
+        android:textColor="@color/colorAccent" />
+</RelativeLayout>

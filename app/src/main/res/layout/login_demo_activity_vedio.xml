@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/login_demo_login_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.VedioActivity">
+
+    <RelativeLayout
+        android:id="@+id/login_demo_login_parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/login_demo_log_image"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="440dp"
+            android:padding="5dp"
+            android:src="@mipmap/login_demo_icon" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="400dp"
+            android:text="快 捷 登 录 体 验"
+            android:textColor="#ffffff"
+            android:textSize="15sp" />
+
+        <Button
+            android:id="@+id/login_demo_login_G"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginBottom="250dp"
+            android:background="@drawable/login_demo_auth_bt_cus_g"
+            android:gravity="center"
+            android:stateListAnimator="@null"
+            android:text="@string/enter_now"
+            android:textColor="#000000"
+            android:textSize="15sp" />
+    </RelativeLayout>
+</RelativeLayout>

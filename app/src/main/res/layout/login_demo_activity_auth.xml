@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <ImageView
+            android:id="@+id/login_demo_authentication_back"
+            android:layout_width="27dp"
+            android:layout_height="27dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="7dp"
+            android:padding="5dp"
+            android:src="@drawable/login_demo_return_left_bg" />
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/login_demo_authentication_iconid"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="80dp"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/login_demo_icon" />
+
+    <EditText
+        android:id="@+id/login_demo_authentication_editphoneid"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:layout_below="@+id/login_demo_authentication_iconid"
+        android:layout_marginLeft="38dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginRight="38dp"
+        android:background="@drawable/login_demo_num_bg"
+        android:gravity="center_vertical"
+        android:hint="请输入本机号码"
+        android:inputType="number"
+        android:maxLength="11"
+        android:paddingLeft="25dp"
+        android:textColorHint="#aaacaf"
+        android:textCursorDrawable="@null"
+        android:textSize="14sp" />
+
+    <RelativeLayout
+        android:id="@+id/login_demo_authentication_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/login_demo_authentication_editphoneid"
+        android:layout_marginLeft="38dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginRight="38dp"
+        android:background="@drawable/login_demo_auth_bt">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="46dp"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="本机号码一键认证"
+            android:textColor="#ffffff"
+            android:textSize="15sp" />
+
+        <ProgressBar
+            android:id="@+id/login_demo_loading"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginRight="12dp"
+            android:indeterminateBehavior="repeat"
+            android:indeterminateDrawable="@drawable/login_demo_loading_anim"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/login_demo_authentication_button"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="50dp"
+        android:lineSpacingExtra="4dp"
+        android:text="@string/tip_content"
+        android:textColor="#838ba8"
+        android:textSize="12sp" />
+
+</RelativeLayout>

@@ -1,0 +1,95 @@
+apply plugin: 'com.android.application'
+apply plugin: 'AndResGuard'
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "chuanglan.com.shanyantest"
+        minSdkVersion 16
+        targetSdkVersion 28
+        versionCode 233
+        versionName "2.3.3"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    signingConfigs {
+        config {
+            storeFile file('../app/shanyan_sy123456.jks')
+            storePassword 'sy123456'
+            keyAlias 'shanyan'
+            keyPassword 'sy123456'
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled true
+            signingConfig signingConfigs.config
+            zipAlignEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField('String', 'SERVER_URL', '"https://sy.cl2009.com/"')
+            buildConfigField('String', 'APP_ID', '"loXN4jDs"')
+            buildConfigField('String', 'APP_KEY', '"anOiEQaQ"')
+        }
+
+        debug {
+            minifyEnabled false
+            signingConfig signingConfigs.config
+            zipAlignEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField('String', 'SERVER_URL', '"https://sy.cl2009.com/"')
+            buildConfigField('String', 'APP_ID', '"loXN4jDs"')
+            buildConfigField('String', 'APP_KEY', '"anOiEQaQ"')
+        }
+
+    }
+}
+repositories {
+    flatDir {
+        dirs '../app/libs'
+    }
+}
+
+dependencies {
+    implementation 'com.android.support:appcompat-v7:28.+'
+    implementation fileTree(include: ['*.aar'], dir: 'libs')
+    //引入闪验
+    //implementation 'com.chuanglan.android.sdk:shanyan:2.3.4.9'
+    //Retrofit demo用于网络请求
+    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
+    implementation 'com.squareup.okhttp3:okhttp:3.9.1'
+    implementation 'com.squareup.retrofit2:converter-gson:2.0.0'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.4.1'
+
+    //Glide demo用于加载动图
+    implementation 'com.github.bumptech.glide:glide:3.7.0'
+
+    //Bugly demo用于崩溃日志收集
+    implementation 'com.tencent.bugly:crashreport:latest.release'
+    implementation 'com.tencent.bugly:nativecrashreport:latest.release'
+
+    //leakcanary demo用于内存泄漏检测
+    implementation 'com.squareup.leakcanary:leakcanary-android:1.6.3'
+
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+}
+andResGuard {
+    mappingFile = null
+    use7zip = true
+    useSign = true
+    keepRoot = false
+    whiteList = [
+            "R.anim.umcsdk*",
+            "R.drawable.umcsdk*",
+            "R.layout.layout*",
+            "R.id.yjdl*",
+    ]
+    compressFilePattern = [
+            "*.png",
+            "*.jpg",
+            "*.jpeg",
+            "*.gif",
+            "resources.arsc"
+    ]
+    sevenzip {
+        artifact = 'com.tencent.mm:SevenZip:1.2.15'
+    }
+
+}
