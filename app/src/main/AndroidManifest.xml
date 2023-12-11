@@ -4,18 +4,10 @@
 
     <!-- ******************************SDK必要权限************************** -->
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-    <uses-permission android:name="android.permission.GET_TASKS" />
-    <!-- ******************************SDK建议权限*************************** -->
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <!-- ********************demo示例权限，开发者可不添加******************** -->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:name="com.login.demo.MyApplication"
@@ -30,24 +22,12 @@
         <!--  SDK必须配置的activity    start - - - - - - - - - - - - - - - -->
         <!-- ***********授权页activity************ -->
         <activity
-            android:name="com.chuanglan.shanyan_sdk.view.CmccLoginActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:exported="false"
-            android:launchMode="singleTop"
-            android:theme="@style/dialogStyle" />
-        <activity-alias
-            android:name="com.cmic.gen.sdk.view.GenLoginAuthActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:exported="false"
-            android:launchMode="singleTop"
-            android:targetActivity="com.chuanglan.shanyan_sdk.view.CmccLoginActivity"
-            android:theme="@style/dialogStyle" />
-        <activity
             android:name="com.chuanglan.shanyan_sdk.view.ShanYanOneKeyActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="false"
             android:launchMode="singleTop"
             android:theme="@style/dialogStyle" />
+
         <!-- ***********协议页activity************ -->
         <activity
             android:name="com.chuanglan.shanyan_sdk.view.CTCCPrivacyProtocolActivity"
