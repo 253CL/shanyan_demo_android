@@ -1,15 +1,17 @@
 package com.login.demo.view;
 
-import android.Manifest;
+import android.app.AlertDialog;
 import android.content.Intent;
-import android.content.pm.PackageManager;
+import android.content.SharedPreferences;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.chuanglan.shanyan_sdk.OneKeyLoginManager;
@@ -23,9 +25,9 @@ import com.login.demo.R;
  * 启动页activity
  */
 public class SplashActivity extends BaseActivity {
-    private final int MY_READ_PHONE_STATE = 0;
     private MyCountDownTimer mCountDownTimer;
     private TextView mCountDownTextView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +35,65 @@ public class SplashActivity extends BaseActivity {
         setContentView(R.layout.login_demo_activity_splash);
         initViews();
         setListener();
-        requestPermission();
+        isFirstStart();
+    }
+
+    /**
+     * 判断是否是首次启动
+     */
+    public void isFirstStart() {
+        final SharedPreferences preferences = getSharedPreferences("NB_FIRST_START", 0);
+        boolean isFirst = preferences.getBoolean("FIRST_START", true);
+        if (isFirst) {// 第一次
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            //获取界面
+            View view = LayoutInflater.from(this).inflate(R.layout.login_demo_dialog_privacy, null);
+            //将界面填充到AlertDiaLog容器并去除边框
+            builder.setView(view);
+            //取消点击外部消失弹窗
+            builder.setCancelable(false);
+            //创建AlertDiaLog
+            builder.create();
+            //AlertDiaLog显示
+            final AlertDialog dialog = builder.show();
+            // 移除dialog的decorview背景色
+            dialog.getWindow().getDecorView().setBackground(new ColorDrawable(0X00000000));
+            dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT,WindowManager.LayoutParams.MATCH_PARENT);
+            //初始化控件
+            TextView but_ok = view.findViewById(R.id.login_demo_privacy_ensure);
+            TextView but_return = view.findViewById(R.id.login_demo_privace_cancel);
+            //同意按钮
+            but_ok.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view1) {
+                    preferences.edit().putBoolean("FIRST_START", false).apply();
+                    dialog.dismiss();
+                    //调用一键登录方法
+                    loginMethod();
+                }
+            });
+            //取消按钮
+            but_return.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view1) {
+                    dialog.dismiss();
+                    SplashActivity.this.finish();
+                }
+            });
+        } else {
+            preferences.edit().putBoolean("FIRST_START", false).apply();
+            //调用一键登录方法
+            loginMethod();
+        }
+    }
+
+    //拦截返回键事件
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     private void setListener() {
@@ -52,20 +112,11 @@ public class SplashActivity extends BaseActivity {
         mCountDownTextView = findViewById(R.id.login_demo_countdown_tv);
     }
 
-    private void requestPermission() {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
-            //没有权限时动态申请权限
-            ActivityCompat.requestPermissions(SplashActivity.this, new String[]{Manifest.permission.READ_PHONE_STATE}, MY_READ_PHONE_STATE);
-        } else {
-            //创建启动页倒计时类
-            mCountDownTimer = new MyCountDownTimer(3000, 1000);
-            mCountDownTimer.start();
-            //调用一键登录方法
-            loginMethod();
-        }
-    }
 
     private void loginMethod() {
+        //创建启动页倒计时类
+        mCountDownTimer = new MyCountDownTimer(3000, 1000);
+        mCountDownTimer.start();
         //SDK第一步：初始化
         OneKeyLoginManager.getInstance().init(getApplicationContext(), BuildConfig.APP_ID, new InitListener() {
             @Override
@@ -84,17 +135,6 @@ public class SplashActivity extends BaseActivity {
 
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == MY_READ_PHONE_STATE) {
-            //创建启动页倒计时类
-            mCountDownTimer = new MyCountDownTimer(3000, 1000);
-            mCountDownTimer.start();
-            //调用一键登录方法
-            loginMethod();
-        }
-    }
 
     class MyCountDownTimer extends CountDownTimer {
         /**
