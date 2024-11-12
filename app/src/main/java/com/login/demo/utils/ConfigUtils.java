@@ -29,19 +29,27 @@ public class ConfigUtils {
             privacyLayout.setVisibility(View.VISIBLE);
         }
     }
+
+    /**
+     * 多协议配置示例
+     */
     private static List<ConfigPrivacyBean> getMorePrivacy() {
         List<ConfigPrivacyBean> list = new ArrayList();
-        ConfigPrivacyBean bean = new ConfigPrivacyBean("闪验用户协议", "https://api.253.com/api_doc/yin-si-zheng-ce/wei-hu-wang-luo-an-quan-sheng-ming.html");
-        bean.setTitle("闪验");
-        bean.setColor(Color.parseColor("#0033aa"));
-        list.add(bean);
-        list.add(new ConfigPrivacyBean("闪验隐私政策1", "https://api.253.com/api_doc/yin-si-zheng-ce/ge-ren-xin-xi-bao-hu-sheng-ming.html"));
-        list.add(new ConfigPrivacyBean("闪验隐私政策2", "https://api.253.com/api_doc/yin-si-zheng-ce/ge-ren-xin-xi-bao-hu-sheng-ming.html"));
-        list.add(new ConfigPrivacyBean("闪验隐私政策3", "https://api.253.com/api_doc/yin-si-zheng-ce/ge-ren-xin-xi-bao-hu-sheng-ming.html"));
-        list.add(new ConfigPrivacyBean("闪验隐私政策4", "https://api.253.com/api_doc/yin-si-zheng-ce/ge-ren-xin-xi-bao-hu-sheng-ming.html", Color.parseColor("#00ff00")));
-        list.add(new ConfigPrivacyBean("闪验隐私政策5", "https://api.253.com/api_doc/yin-si-zheng-ce/ge-ren-xin-xi-bao-hu-sheng-ming.html"));
+        list.add(new ConfigPrivacyBean("闪验隐私政策1", "https://api.253.com.html", Color.parseColor("#cc00cc"), "间隔1"));
+        list.add(new ConfigPrivacyBean("闪验隐私政策2", "https://api.253.com.html", Color.parseColor("#00cc00")));
+        list.add(new ConfigPrivacyBean("闪验隐私政策3", "https://api.253.com.html"));
+        ConfigPrivacyBean bean4 = new ConfigPrivacyBean("闪验隐私政策4", "https://api.253.com.html");
+        bean4.setColor(Color.parseColor("#0000cc"));
+        bean4.setMidStr("间隔4");
+        bean4.setTitle("闪验隐私政策4");
+        list.add(bean4);
+        ConfigPrivacyBean bean5 = new ConfigPrivacyBean("闪验隐私政策5", "https://api.253.com.html", Color.parseColor("#aacc00"));
+        bean5.setMidStr("间隔5");
+        bean5.setTitle("闪验隐私政策5");
+        list.add(bean5);
         return list;
     }
+
     /**
      * 样式A配置示例: SDK固有控件都有默认值，只需设置自己想要修改的配置
      *
@@ -188,7 +196,7 @@ public class ConfigUtils {
                 //设置自定义协议（参数1：协议名称；参数2：协议链接）
                 //.setAppPrivacyOne("用户协议", "https://api.253.com/api_doc/yin-si-zheng-ce/wei-hu-wang-luo-an-quan-sheng-ming.html")
                 //设置协议外部文字描述
-                .setPrivacyText("我已阅读并同意", "和", "", "", "")
+                .setPrivacyText("我已阅读并同意", "默认间隔", "", "", "")
                 .setMorePrivacy(getMorePrivacy())
                 //设置是否隐藏书名号
                 .setPrivacySmhHidden(true)
@@ -733,6 +741,7 @@ public class ConfigUtils {
                 })
                 //设置协议复选框隐藏
                 .setCheckBoxHidden(true)
+                .setPrivacyState(false)
                 //设置协议栏距离屏幕左侧偏移量
                 .setPrivacyOffsetX(20)
                 //设置协议栏距离屏幕底部偏移量
@@ -747,6 +756,10 @@ public class ConfigUtils {
                 .setAppPrivacyOne("用户协议", "https://api.253.com/api_doc/yin-si-zheng-ce/wei-hu-wang-luo-an-quan-sheng-ming.html")
                 //设置协议外部文字描述
                 .setPrivacyText("同意", "和", "和", "", "并授权页一键登录APP获取本机号码")
+                .setStatusBarHidden(true)
+                .setFullScreen(false)
+                .setFitsSystemWindows(false)
+                .setVirtualKeyTransparent(true)
                 .build();
         return uiConfig;
     }
