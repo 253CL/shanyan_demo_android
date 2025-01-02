@@ -19,9 +19,10 @@ allprojects {
     repositories {
         google()
         jcenter()
-        maven {
-            url "https://nexus-sdk.cm253.com/repository/maven-public/"
-        }
+        maven { url 'https://maven.aliyun.com/repository/public' }
+        maven { url 'https://maven.aliyun.com/repository/central' }
+        maven { url 'https://maven.aliyun.com/repository/google' }
+        maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
     }
 }
 
