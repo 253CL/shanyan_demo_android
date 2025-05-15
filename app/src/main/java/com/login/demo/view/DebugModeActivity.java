@@ -1,5 +1,6 @@
 package com.login.demo.view;
 
+
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -79,28 +80,18 @@ public class DebugModeActivity extends BaseActivity implements View.OnClickListe
         if (view == null) {
             return;
         }
-        switch (view.getId()) {
-            case R.id.login_dmeo_sdk_init:
-                startNativeInit();
-                break;
-            case R.id.login_dmeo_sdk_pre:
-                startPreInit();
-                break;
-            case R.id.login_dmeo_sdk_login:
-                startAuthorityPage();
-                break;
-            case R.id.login_dmeo_sdk_phone:
-                //置换手机号
-                displacePhoneNumber();
-                break;
-            case R.id.network_btn:
-                //显示弹框
-                displayDialog();
-                break;
-            default:
-                break;
+        int id = view.getId();
+        if (id == R.id.login_dmeo_sdk_init) {
+            startNativeInit();
+        } else if (id == R.id.login_dmeo_sdk_pre) {
+            startPreInit();
+        } else if (id == R.id.login_dmeo_sdk_login) {
+            startAuthorityPage();
+        } else if (id == R.id.login_dmeo_sdk_phone) {
+            displacePhoneNumber();
+        } else if (id == R.id.network_btn) {
+            displayDialog();
         }
-
     }
 
     private void displayDialog() {

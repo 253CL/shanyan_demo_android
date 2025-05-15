@@ -43,20 +43,16 @@ public class ResultActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_demo_activity_result);
-        initViews();
-        initEvent();
+        try {
+            initViews();
+            initEvent();
+            initListener();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    private void initViews() {
-        image_result = findViewById(R.id.login_dmeo_image_result);
-        result_phone = findViewById(R.id.login_dmeo_result_phone);
-        result_telecom = findViewById(R.id.login_dmeo_result_telecom);
-        login_success = findViewById(R.id.login_dmeo_login_success);
-        try_again = findViewById(R.id.login_dmeo_try_again);
-        authenticationresult_success = findViewById(R.id.login_dmeo_authenticationresult_success);
-        authenticationresult_fail = findViewById(R.id.login_dmeo_authenticationresult_fail);
-        errorText = findViewById(R.id.login_dmeo_authentication_errorText);
-        Glide.with(this).load(R.mipmap.login_demo_result_sucess).into(image_result);
+    private void initListener() {
         try_again.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,7 +68,18 @@ public class ResultActivity extends Activity {
                 finish();
             }
         });
+    }
 
+    private void initViews() {
+        image_result = findViewById(R.id.login_dmeo_image_result);
+        result_phone = findViewById(R.id.login_dmeo_result_phone);
+        result_telecom = findViewById(R.id.login_dmeo_result_telecom);
+        login_success = findViewById(R.id.login_dmeo_login_success);
+        try_again = findViewById(R.id.login_dmeo_try_again);
+        authenticationresult_success = findViewById(R.id.login_dmeo_authenticationresult_success);
+        authenticationresult_fail = findViewById(R.id.login_dmeo_authenticationresult_fail);
+        errorText = findViewById(R.id.login_dmeo_authentication_errorText);
+        Glide.with(this).load(R.mipmap.login_demo_result_sucess).into(image_result);
     }
 
     private void initEvent() {
@@ -90,7 +97,6 @@ public class ResultActivity extends Activity {
                     //应用的appid
                     String appId = BuildConfig.APP_ID;
                     String token = jsonObject.optString("token");
-
                     String encryptKey = packageSign.substring(0, 16);
                     String encryptIv = packageSign.substring(16);
                     String time = System.currentTimeMillis() + "";
@@ -189,11 +195,13 @@ public class ResultActivity extends Activity {
                     String response_data = new String(response.body().bytes());
                     Log.e("VVV", "置换手机号结果==" + response_data);
                     JSONObject json = new JSONObject(response_data);
-                    int code = json.optInt("retCode");
-                    if (code == 0) {
+                    int code = json.optInt("code");
+                    if (code == 200000) {
                         JSONObject data = json.getJSONObject("data");
                         String mobileName = data.optString("mobileName");
-                        result_phone.setText(mobileName);
+                        String key = DataProcessUtils.md5(BuildConfig.APP_KEY);
+                        String phone = DataProcessUtils.decrypt(mobileName, key.substring(0, 16), key.substring(16));
+                        result_phone.setText(phone);
                         result_phone.setVisibility(View.VISIBLE);
                         login_success.setText("登录成功");
                         authenticationresult_success.setVisibility(View.VISIBLE);
@@ -236,8 +244,8 @@ public class ResultActivity extends Activity {
                     String response_data = new String(response.body().bytes());
                     Log.e("VVV", "校验手机号结果==" + response_data);
                     JSONObject json = new JSONObject(response_data);
-                    int code = json.optInt("retCode");
-                    if (code == 0) {
+                    int code = json.optInt("code");
+                    if (code == 200000) {
                         String data = json.optString("data");
                         JSONObject jsonObject = new JSONObject(data);
                         if (jsonObject.getString("isVerify").equals("1")) {

@@ -23,6 +23,11 @@
 #
 # 对于一些基本指令的添加
 #
+# Retrofit
+-keep class retrofit2.** { *; }
+-keepclasseswithmembers class * {
+    @retrofit2.http.* <methods>;
+}
 #############################################
 -ignorewarnings
 -dontwarn com.baidu.**

@@ -3,7 +3,6 @@ package com.login.demo.view;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 
 import com.chuanglan.shanyan_sdk.OneKeyLoginManager;
 import com.chuanglan.shanyan_sdk.listener.ActionListener;
@@ -13,6 +12,8 @@ import com.login.demo.utils.AbScreenUtils;
 import com.login.demo.utils.ConfigUtils;
 
 import org.json.JSONObject;
+
+import androidx.fragment.app.FragmentActivity;
 
 public class BaseActivity extends FragmentActivity {
 
