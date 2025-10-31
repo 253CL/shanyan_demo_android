@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.chuanglan.shanyan_sdk.OneKeyLoginManager;
 import com.chuanglan.shanyan_sdk.listener.ShanYanCustomInterface;
 import com.chuanglan.shanyan_sdk.tool.ConfigPrivacyBean;
+import com.chuanglan.shanyan_sdk.tool.OperatorInfoBean;
 import com.chuanglan.shanyan_sdk.tool.ShanYanUIConfig;
 import com.login.demo.R;
 
@@ -29,7 +30,17 @@ public class ConfigUtils {
             privacyLayout.setVisibility(View.VISIBLE);
         }
     }
-
+    /**
+     * 运营商信息配置示例
+     */
+    private static List<OperatorInfoBean> getOperatorInfo() {
+        List<OperatorInfoBean> list = new ArrayList();
+        list.add(new OperatorInfoBean("中国移动协议", "https://aa.bb.com/", "中国移动提供服务"));
+        list.add(new OperatorInfoBean("中国联通协议", "https://aa.bb.com/", "中国联通提供服务"));
+        list.add(new OperatorInfoBean("中国电信协议", "https://aa.bb.com/", "中国电信提供服务"));
+        list.add(new OperatorInfoBean("中国移动香港协议", "https://aa.bb.com/", "中国香港移动提供服务"));
+        return list;
+    }
     /**
      * 多协议配置示例
      */
@@ -197,9 +208,13 @@ public class ConfigUtils {
                 //.setAppPrivacyOne("用户协议", "https://api.253.com/api_doc/yin-si-zheng-ce/wei-hu-wang-luo-an-quan-sheng-ming.html")
                 //设置协议外部文字描述
                 .setPrivacyText("我已阅读并同意", "默认间隔", "", "", "")
+                //设置运营商信息配置
+                .setOperatorInfo(getOperatorInfo())
+                //设置自定义协议配置
                 .setMorePrivacy(getMorePrivacy())
                 //设置是否隐藏书名号
                 .setPrivacySmhHidden(true)
+                //设置协议未勾选提示文字是否弹出
                 .setCheckBoxTipDisable(true)
                 //添加自定义控件（微信、QQ、微博等第三方登录；最后一个参数填null，即屏蔽父布局点击事件）
                 .addCustomView(thirdRelativeLayout, false, false, null)
