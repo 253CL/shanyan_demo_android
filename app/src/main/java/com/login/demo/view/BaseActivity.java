@@ -3,6 +3,7 @@ package com.login.demo.view;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.chuanglan.shanyan_sdk.OneKeyLoginManager;
 import com.chuanglan.shanyan_sdk.listener.ActionListener;
@@ -23,6 +24,7 @@ public class BaseActivity extends FragmentActivity {
         OneKeyLoginManager.getInstance().setActionListener(new ActionListener() {
             @Override
             public void ActionListner(int type, int code, String message) {
+                Log.e("VVV", "type=" + type + "code=" + code + "message=" + message);
                 if (type == 3 && code == 0) {
                     //界面示例A示例和调试模式，当协议勾选框未勾选时点击登录按钮，需要弹协议勾选框
                     ConfigUtils.setPrivacyLayoutVisible();

@@ -9,6 +9,7 @@
     <RelativeLayout
         android:id="@+id/login_dmeo_other_login_back"
         android:layout_width="wrap_content"
+        android:layout_marginTop="50dp"
         android:layout_height="wrap_content">
 
         <ImageView

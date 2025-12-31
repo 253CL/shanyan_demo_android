@@ -23,13 +23,17 @@ import java.util.List;
 
 
 public class ConfigUtils {
-    private static RelativeLayout privacyLayout;
+    private static RelativeLayout privacyLayout, privacyLayoutC;
 
     public static void setPrivacyLayoutVisible() {
         if (privacyLayout != null) {
             privacyLayout.setVisibility(View.VISIBLE);
         }
+        if (privacyLayoutC != null) {
+            privacyLayoutC.setVisibility(View.VISIBLE);
+        }
     }
+
     /**
      * 运营商信息配置示例
      */
@@ -41,6 +45,7 @@ public class ConfigUtils {
         list.add(new OperatorInfoBean("中国移动香港协议", "https://aa.bb.com/", "中国香港移动提供服务"));
         return list;
     }
+
     /**
      * 多协议配置示例
      */
@@ -212,6 +217,8 @@ public class ConfigUtils {
                 .setOperatorInfo(getOperatorInfo())
                 //设置自定义协议配置
                 .setMorePrivacy(getMorePrivacy())
+                .setPrivacyTitleArray(new String[]{"测试协议标题1", "测试协议标题2", "测试协议标题3", "测试协议标题4"})
+                .setPrivacyNavTextSize(20)
                 //设置是否隐藏书名号
                 .setPrivacySmhHidden(true)
                 //设置协议未勾选提示文字是否弹出
@@ -322,8 +329,6 @@ public class ConfigUtils {
                         AbScreenUtils.showToast(context, "点击使用其他手机号");
                     }
                 })
-                //设置隐藏协议复选框
-                .setCheckBoxHidden(true)
                 //设置协议文字左对齐
                 .setPrivacyOffsetGravityLeft(true)
                 //设置运营商协议展示到最后一个
@@ -369,23 +374,23 @@ public class ConfigUtils {
         /************************************授权页添加自定义控件*************************/
         //自定义协议弹窗
         LayoutInflater layoutInflater = LayoutInflater.from(context);
-        privacyLayout = (RelativeLayout) layoutInflater.inflate(R.layout.login_demo_dialog_privacy, null);
+        privacyLayoutC = (RelativeLayout) layoutInflater.inflate(R.layout.login_demo_dialog_privacy, null);
         RelativeLayout.LayoutParams privacyLayoutLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
-        privacyLayout.setLayoutParams(privacyLayoutLayoutParams);
-        privacyLayout.findViewById(R.id.login_demo_privace_cancel).setOnClickListener(new View.OnClickListener() {
+        privacyLayoutC.setLayoutParams(privacyLayoutLayoutParams);
+        privacyLayoutC.findViewById(R.id.login_demo_privace_cancel).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //点击取消，将授权页协议勾选框设置勾选状态
                 OneKeyLoginManager.getInstance().setCheckBoxValue(false);
-                privacyLayout.setVisibility(View.GONE);
+                privacyLayoutC.setVisibility(View.GONE);
             }
         });
-        privacyLayout.findViewById(R.id.login_demo_privacy_ensure).setOnClickListener(new View.OnClickListener() {
+        privacyLayoutC.findViewById(R.id.login_demo_privacy_ensure).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //点击同意，将授权页协议勾选框设置勾选状态
                 OneKeyLoginManager.getInstance().setCheckBoxValue(true);
-                privacyLayout.setVisibility(View.GONE);
+                privacyLayoutC.setVisibility(View.GONE);
             }
         });
         //自定义控件（右上角“使用其他手机>”）
@@ -408,7 +413,7 @@ public class ConfigUtils {
         /**************************授权页配置（示例配置自上而下，可调整顺序）****************/
         ShanYanUIConfig uiConfig = new ShanYanUIConfig.Builder()
                 //添加协议弹窗
-                .addCustomPrivacyAlertView(privacyLayout)
+                .addCustomPrivacyAlertView(privacyLayoutC)
                 //设置导航栏标题
                 .setNavText("")
                 //设置logo图片
@@ -436,8 +441,6 @@ public class ConfigUtils {
                         AbScreenUtils.showToast(context, "点击其他方式登录");
                     }
                 })
-                //设置协议默认勾选
-                .setPrivacyState(false)
                 //设置协议栏距离屏幕底部偏移量
                 .setPrivacyOffsetBottomY(120)
                 //设置协议文字颜色（参数1：协议名称之外的文字颜色；参数2：协议名称文字颜色）
@@ -521,11 +524,9 @@ public class ConfigUtils {
                 //设置slogan距离顶部（状态栏）偏移量
                 .setSloganOffsetY(120)
                 //设置slogan文字大小
-                .setSloganTextSize(14)
+                //.setSloganTextSize(14)
                 //设置协议默认勾选
                 .setPrivacyState(true)
-                //设置隐藏协议复选框
-                .setCheckBoxHidden(true)
                 //设置协议栏距离屏幕底部偏移量
                 .setPrivacyOffsetBottomY(5)
                 //设置协议距离屏幕两边边距
@@ -673,6 +674,87 @@ public class ConfigUtils {
         return uiConfig;
     }
 
+    //沉浸式横屏样式设置
+    public static ShanYanUIConfig getFLandscapeUiConfig(final Context context) {
+
+        /************************************************自定义控件**************************************************************/
+
+        //其他方式登录
+        LayoutInflater inflater1 = LayoutInflater.from(context);
+        RelativeLayout relativeLayout = (RelativeLayout) inflater1.inflate(R.layout.login_demo_other_login_item_a, null);
+        RelativeLayout.LayoutParams layoutParamsOther = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        layoutParamsOther.setMargins(0, AbScreenUtils.dp2px(context, 170), 0, 0);
+        layoutParamsOther.addRule(RelativeLayout.CENTER_HORIZONTAL);
+        relativeLayout.setLayoutParams(layoutParamsOther);
+        thirdLogin(context, relativeLayout);
+
+
+        /****************************************************设置授权页*********************************************************/
+        Drawable loginBg = context.getResources().getDrawable(R.drawable.login_demo_landscape_bg);
+        Drawable navReturnImgPath = context.getResources().getDrawable(R.drawable.login_demo_return_bg);
+        Drawable logoImgPath = context.getResources().getDrawable(R.mipmap.login_demo_icon);
+        Drawable logBtnImgPath = context.getResources().getDrawable(R.drawable.login_demo_auth_bt_cus_e);
+        Drawable uncheckedImgPath = context.getResources().getDrawable(R.drawable.login_demo_uncheck_cus);
+        Drawable checkedImgPath = context.getResources().getDrawable(R.drawable.login_demo_check_cus);
+
+        //loading自定义加载框
+        LayoutInflater inflater = LayoutInflater.from(context);
+        RelativeLayout view_dialog = (RelativeLayout) inflater.inflate(R.layout.login_demo_loading_white, null);
+        RelativeLayout.LayoutParams mLayoutParams3 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
+        view_dialog.setLayoutParams(mLayoutParams3);
+        ShanYanUIConfig uiConfig = new ShanYanUIConfig.Builder()
+                //授权页导航栏：
+                .setNavText("一键登录导航栏")  //设置导航栏标题文字
+                .setNavTextColor(Color.parseColor("#ffffff")) //设置标题栏文字颜色
+                .setNavReturnImgPath(navReturnImgPath)
+                .setAuthNavTransparent(true)
+                .setNavReturnBtnWidth(25)
+                .setNavReturnBtnHeight(25)
+                .setNavReturnBtnOffsetRightX(30)
+                .setAuthBGImgPath(loginBg)
+                .setFullScreen(true)
+                .setFitsSystemWindows(false)
+
+                //授权页logo（logo的层级在次底层，仅次于自定义控件）
+                .setLogoImgPath(logoImgPath)  //设置logo图片
+                .setLogoWidth(108)   //设置logo宽度
+                .setLogoHeight(36)   //设置logo高度
+                .setLogoOffsetY(10)  //设置logo相对于标题栏下边缘y偏移
+                .setLogoHidden(false)   //是否隐藏logo
+
+                //授权页号码栏：
+                .setNumberColor(0xffffffff)  //设置手机号码字体颜色
+                .setNumFieldOffsetY(65)    //设置号码栏相对于标题栏下边缘y偏移
+                .setNumberSize(18)
+
+
+                //授权页登录按钮：
+                .setLogBtnText("本机号码一键登录")  //设置登录按钮文字
+                .setLogBtnTextColor(0xffffffff)   //设置登录按钮文字颜色
+                .setLogBtnImgPath(logBtnImgPath)   //设置登录按钮图片
+                .setLogBtnOffsetY(120)   //设置登录按钮相对于标题栏下边缘y偏移
+                .setLogBtnTextSize(15)
+                .setLogBtnWidth(330)
+                .setLogBtnHeight(45)
+
+                //授权页隐私栏：
+                .setAppPrivacyOne("闪验用户协议", "https://api.253.com/api_doc/yin-si-zheng-ce/wei-hu-wang-luo-an-quan-sheng-ming.html")  //设置开发者隐私条款1名称和URL(名称，url)
+                .setAppPrivacyTwo("闪验隐私政策", "https://api.253.com/api_doc/yin-si-zheng-ce/ge-ren-xin-xi-bao-hu-sheng-ming.html")  //设置开发者隐私条款2名称和URL(名称，url)
+                .setAppPrivacyColor(0xffffffff, 0xff0085d0)   //	设置隐私条款名称颜色(基础文字颜色，协议文字颜色)
+                .setPrivacyOffsetBottomY(10)
+                .setUncheckedImgPath(uncheckedImgPath)
+                .setCheckedImgPath(checkedImgPath)
+                .setCheckBoxMargin(10, 5, 0, 5)
+                //授权页slogan：
+                .setSloganTextColor(0xff999999)  //设置slogan文字颜色
+                .setSloganOffsetY(100)  //设置slogan相对于标题栏下边缘y偏移
+                .setSloganTextSize(10)
+                .setLoadingView(view_dialog)
+                .addCustomView(relativeLayout, false, false, null)
+                .build();
+        return uiConfig;
+    }
+
     /**
      * 样式F配置示例: SDK固有控件都有默认值，只需设置自己想要修改的配置
      *
@@ -772,7 +854,7 @@ public class ConfigUtils {
                 //设置协议外部文字描述
                 .setPrivacyText("同意", "和", "和", "", "并授权页一键登录APP获取本机号码")
                 .setStatusBarHidden(true)
-                .setFullScreen(false)
+                .setFullScreen(true)
                 .setFitsSystemWindows(false)
                 .setVirtualKeyTransparent(true)
                 .build();

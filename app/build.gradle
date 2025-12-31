@@ -8,7 +8,7 @@ android {
     }
     namespace = "com.login.demo"
 
-    compileSdk 33
+    compileSdk 36
     defaultConfig {
         applicationId "con.login.demo"
         minSdkVersion 16

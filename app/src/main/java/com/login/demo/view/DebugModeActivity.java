@@ -24,7 +24,6 @@ import com.login.demo.R;
 import com.login.demo.utils.ConfigUtils;
 import com.login.demo.utils.NetworkMgsUtils;
 
-
 import java.text.SimpleDateFormat;
 
 public class DebugModeActivity extends BaseActivity implements View.OnClickListener {
@@ -115,6 +114,7 @@ public class DebugModeActivity extends BaseActivity implements View.OnClickListe
         OneKeyLoginManager.getInstance().init(getApplicationContext(), BuildConfig.APP_ID, new InitListener() {
             @Override
             public void getInitStatus(int code, String result) {
+                Log.e("VVV", "初始化： code==" + code + "   result==" + result);
                 cleanData();
                 long costTime = System.currentTimeMillis() - time1;
                 NetworkMgsUtils.INIT_COST_TIME = costTime;
