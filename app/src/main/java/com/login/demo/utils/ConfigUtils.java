@@ -953,8 +953,6 @@ public class ConfigUtils {
                 .setSloganTextSize(13)
                 //设置slogan文字颜色
                 .setSloganTextColor(Color.parseColor("#9A9A9A"))
-                //设置隐藏协议复选框
-                .setCheckBoxHidden(true)
                 //设置协议文字左对齐
                 .setPrivacyOffsetGravityLeft(true)
                 //设置运营商协议展示到最后一个
