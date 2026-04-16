@@ -36,50 +36,37 @@ public class SelectorActivity extends BaseActivity implements View.OnClickListen
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.demo_seletor_A:
-                OneKeyLoginManager.getInstance().setAuthThemeConfig(ConfigUtils.getAConfig(getApplicationContext()), null);
-                openLoginActivity(null);
-                break;
-            case R.id.demo_seletor_B:
-                OneKeyLoginManager.getInstance().setAuthThemeConfig(ConfigUtils.getBConfig(getApplicationContext()), null);
-                openLoginActivity(null);
-                break;
-            case R.id.demo_seletor_C:
-                OneKeyLoginManager.getInstance().setAuthThemeConfig(ConfigUtils.getCConfig(getApplicationContext()), null);
-                openLoginActivity(null);
-                break;
-            case R.id.demo_seletor_D:
-                OneKeyLoginManager.getInstance().setAuthThemeConfig(ConfigUtils.getDConfig(getApplicationContext()), null);
-                openLoginActivity(null);
-                break;
-            case R.id.demo_seletor_E:
-                OneKeyLoginManager.getInstance().setAuthThemeConfig(ConfigUtils.getEConfig(getApplicationContext()), null);
-                openLoginActivity(null);
-                break;
-            case R.id.demo_seletor_F:
-                Intent intentF = new Intent(SelectorActivity.this, LandscapeActivity.class);
-                startActivity(intentF);
-                break;
-            case R.id.demo_seletor_G:
-                Intent intentG = new Intent(SelectorActivity.this, VedioActivity.class);
-                startActivity(intentG);
-                break;
-            case R.id.demo_seletor_H:
-                OneKeyLoginManager.getInstance().setAuthThemeConfig(ConfigUtils.getHConfig(getApplicationContext()), null);
-                openLoginActivity(null);
-                break;
-            case R.id.demo_seletor_I:
-                Intent intentH = new Intent(SelectorActivity.this, AuthenticationActivity.class);
-                startActivity(intentH);
-                break;
-
-            case R.id.demo_seletor_J:
-                Intent intentI = new Intent(SelectorActivity.this, DebugModeActivity.class);
-                startActivity(intentI);
-                break;
-            default:
-                break;
+        int id = v.getId();
+        if (id == R.id.demo_seletor_A) {
+            OneKeyLoginManager.getInstance().setAuthThemeConfig(ConfigUtils.getAConfig(getApplicationContext()), null);
+            openLoginActivity(null);
+        } else if (id == R.id.demo_seletor_B) {
+            OneKeyLoginManager.getInstance().setAuthThemeConfig(ConfigUtils.getBConfig(getApplicationContext()), null);
+            openLoginActivity(null);
+        } else if (id == R.id.demo_seletor_C) {
+            OneKeyLoginManager.getInstance().setAuthThemeConfig(ConfigUtils.getCConfig(getApplicationContext()), null);
+            openLoginActivity(null);
+        } else if (id == R.id.demo_seletor_D) {
+            OneKeyLoginManager.getInstance().setAuthThemeConfig(ConfigUtils.getDConfig(getApplicationContext()), null);
+            openLoginActivity(null);
+        } else if (id == R.id.demo_seletor_E) {
+            OneKeyLoginManager.getInstance().setAuthThemeConfig(ConfigUtils.getEConfig(getApplicationContext()), null);
+            openLoginActivity(null);
+        } else if (id == R.id.demo_seletor_F) {
+            Intent intentF = new Intent(SelectorActivity.this, LandscapeActivity.class);
+            startActivity(intentF);
+        } else if (id == R.id.demo_seletor_G) {
+            Intent intentG = new Intent(SelectorActivity.this, VedioActivity.class);
+            startActivity(intentG);
+        } else if (id == R.id.demo_seletor_H) {
+            OneKeyLoginManager.getInstance().setAuthThemeConfig(ConfigUtils.getHConfig(getApplicationContext()), null);
+            openLoginActivity(null);
+        } else if (id == R.id.demo_seletor_I) {
+            Intent intentH = new Intent(SelectorActivity.this, AuthenticationActivity.class);
+            startActivity(intentH);
+        } else if (id == R.id.demo_seletor_J) {
+            Intent intentI = new Intent(SelectorActivity.this, DebugModeActivity.class);
+            startActivity(intentI);
         }
     }
 

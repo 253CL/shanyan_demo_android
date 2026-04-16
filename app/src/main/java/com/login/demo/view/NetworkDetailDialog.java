@@ -6,9 +6,6 @@ import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.DialogFragment;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
@@ -24,6 +21,9 @@ import com.chuanglan.shanyan_sdk.OneKeyLoginManager;
 import com.login.demo.R;
 import com.login.demo.utils.NetworkMgsUtils;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 
 
 public class NetworkDetailDialog extends DialogFragment implements View.OnClickListener {
@@ -155,12 +155,8 @@ public class NetworkDetailDialog extends DialogFragment implements View.OnClickL
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btn_sure:
-                dismiss();
-                break;
-            default:
-                break;
+        if (v.getId() == R.id.btn_sure) {
+            dismiss();
         }
     }
 

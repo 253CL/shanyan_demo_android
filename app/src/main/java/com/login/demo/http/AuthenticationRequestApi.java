@@ -16,7 +16,7 @@ public interface AuthenticationRequestApi {
      * @param params
      * @return
      */
-    @POST("/flash/demo/mobileQuery/limit")
+    @POST("/open/flashsdk/mobile-query")
     @FormUrlEncoded
     Call<ResponseBody> getMobile(@FieldMap Map<String, String> params);
 
@@ -26,7 +26,7 @@ public interface AuthenticationRequestApi {
      * @param params
      * @return
      */
-    @POST("/flash/demo/mobileValidate/limit")
+    @POST("/open/flashsdk/mobile-validate")
     @FormUrlEncoded
     Call<ResponseBody> authentication(@FieldMap Map<String, String> params);
 }

@@ -4,8 +4,10 @@ import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
+import android.text.TextUtils;
 
 import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 import java.util.Map;
 
@@ -102,44 +104,51 @@ public class DataProcessUtils {
      * @return
      */
     public static String md5(String str) {
+        if (TextUtils.isEmpty(str)) {
+            return "";
+        }
+        MessageDigest md5 = null;
         try {
-            MessageDigest alga = MessageDigest.getInstance("MD5");
-            alga.update(str.getBytes());
-            byte[] digesta = alga.digest();
-            return byte2hex(digesta);
-        } catch (Exception e) {
+            md5 = MessageDigest.getInstance("MD5");
+            byte[] bytes = md5.digest(str.getBytes());
+            String result = "";
+            for (byte b : bytes) {
+                String temp = Integer.toHexString(b & 0xff);
+                if (temp.length() == 1) {
+                    temp = "0" + temp;
+                }
+                result += temp;
+            }
+            return result;
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
         }
         return "";
     }
 
-    public static String byte2hex(byte[] b) {
-        String hs = "";
-        String stmp = "";
-        for (int n = 0; n < b.length; n++) {
-            stmp = Integer.toHexString(b[n] & 0xFF);
-            if (stmp.length() == 1) {
-                hs = new StringBuilder().append(hs).append("0").append(stmp).toString();
-            } else {
-                hs = hs + stmp;
-            }
-        }
-        return hs.toUpperCase();
-    }
-
-
     /**
      * Description: AES解密
      */
-    public static String decrypt(String sSrc, String appSecret) throws Exception {
-        String md5Key = md5(appSecret).toUpperCase();//32位MD5转大写
-        String sKey = md5Key.substring(0, 16);
-        String siv = md5Key.substring(16);
-        byte[] Decrypt = hexToBytes(sSrc);//转为字节数组
-        Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
-        SecretKeySpec skeySpec = new SecretKeySpec(sKey.getBytes(CHARSET), "AES");
-        IvParameterSpec iv = new IvParameterSpec(siv.getBytes(CHARSET));
-        cipher.init(Cipher.DECRYPT_MODE, skeySpec, iv);//使用解密模式初始化
-        return new String(cipher.doFinal(Decrypt), CHARSET);
+    public static String decrypt(String sSrc, String sKey, String siv) throws Exception {
+        try {
+            if (sSrc == null || sSrc.length() == 0) {
+                return null;
+            }
+            if (sKey == null) {
+                throw new Exception("decrypt key is null");
+            }
+            if (sKey.length() != 16) {
+                throw new Exception("decrypt key length error");
+            }
+            byte[] Decrypt = hexToBytes(sSrc);
+            Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
+            SecretKeySpec skeySpec = new SecretKeySpec(sKey.getBytes(CHARSET), "AES");
+            IvParameterSpec iv = new IvParameterSpec(siv.getBytes(CHARSET));//new IvParameterSpec(getIV());
+            cipher.init(Cipher.DECRYPT_MODE, skeySpec, iv);//使用解密模式初始化 密
+            return new String(cipher.doFinal(Decrypt), CHARSET);
+        } catch (Exception ex) {
+            throw new Exception("decrypt errot", ex);
+        }
     }
 
     public static byte[] hexToBytes(String str) {

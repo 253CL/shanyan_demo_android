@@ -3,7 +3,6 @@ package com.login.demo.view;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -16,6 +15,8 @@ import android.widget.Toast;
 import com.chuanglan.shanyan_sdk.OneKeyLoginManager;
 import com.chuanglan.shanyan_sdk.listener.AuthenticationExecuteListener;
 import com.login.demo.R;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 
 public class AuthenticationActivity extends AppCompatActivity {
@@ -53,7 +54,22 @@ public class AuthenticationActivity extends AppCompatActivity {
                 showKeyboard(false);
                 //执行本机号码一键认证
                 final String phone = authentication_editphoneid.getText().toString();
-                int result = checkPhoneNum(phone);
+                authentication_button.setClickable(false);
+                loading.setVisibility(View.VISIBLE);
+                OneKeyLoginManager.getInstance().startAuthentication(new AuthenticationExecuteListener() {
+                    @Override
+                    public void authenticationRespond(int code, String result) {
+                        Intent intent = new Intent(AuthenticationActivity.this, ResultActivity.class);
+                        intent.putExtra("type", "1");
+                        intent.putExtra("result", result);
+                        intent.putExtra("code", code);
+                        intent.putExtra("mobile", phone);
+                        intent.putExtra("startTime", System.currentTimeMillis());
+                        startActivity(intent);
+                        finish();
+                    }
+                });
+              /*  int result = checkPhoneNum(phone);
                 if (result == 2) {
                     Toast.makeText(getApplicationContext(), "请输入手机号", Toast.LENGTH_SHORT).show();
                     return;
@@ -76,7 +92,7 @@ public class AuthenticationActivity extends AppCompatActivity {
                             finish();
                         }
                     });
-                }
+                }*/
             }
         });
     }

@@ -14,6 +14,7 @@ public class MyApplication extends Application {
 
         //SDK配置debug开关 （必须放在初始化之前，开启后可打印SDK更加详细日志信息）
         OneKeyLoginManager.getInstance().setDebug(true);
+        OneKeyLoginManager.getInstance().setInitDebug(true);
     }
 
 
